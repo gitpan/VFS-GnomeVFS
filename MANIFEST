@@ -1,0 +1,13 @@
+README
+Changes
+MANIFEST
+Makefile.PL
+GnomeVFS.pm
+GnomeVFS.xs
+t/00use.t
+t/01read.t
+t/02write.t
+t/03exists.t
+t/04stat.t
+t/05move.t
+t/06unlink.t
