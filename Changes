@@ -1,2 +1,10 @@
 
-There are no changes yet, but I'm sure there will be soon.
+
+Sun Nov 10 15:15:58 GMT 2002
+0.03
+  * fixed a bug for detecting the difference in the directory open command
+    for version 2 of gnome-vfs
+
+0.02
+  * added support for reading directories
+  * added support for the $/ opperator

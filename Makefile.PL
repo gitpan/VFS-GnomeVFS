@@ -8,10 +8,11 @@ my $pkgcmd = 'pkg-config ';
 my $allopt = $pkgcmd.' --list-all';
 my $vfscmd = 'gnome-vfs-config ';
 
-my ($LIBS, $INCS);
+my ($LIBS, $INCS, $DEFINE);
 
 if (`which $pkgcmd` && 
      grep(/gnome\-vfs\-module\-2/, split(/\n/, run_cmd($allopt))) ){
+     $DEFINE = '-DGNOMEVFS2';
   ($LIBS, $INCS) = gnome_vfs_2();
 } elsif (`which $vfscmd`){
   ($LIBS, $INCS) = gnome_vfs_1();
@@ -27,7 +28,7 @@ WriteMakefile(
     		'SUFFIX'	=> '.tgz'},
     'NAME'	=> 'VFS::GnomeVFS',
     'VERSION_FROM' => 'GnomeVFS.pm',
-    'DEFINE'	=> '',   
+    'DEFINE'	=> $DEFINE,   
     'LIBS'	=> $LIBS,   
     'INC'	=> $INCS,
 );

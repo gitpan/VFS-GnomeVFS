@@ -361,10 +361,14 @@ SV* do_vfs_dir_open(SV* sv_uri){
   GnomeVFSDirectoryHandle *handle;
   GnomeVFSResult    result;
 
-// GnomeVFSResult  gnome_vfs_directory_open (GnomeVFSDirectoryHandle **handle, const gchar *text_uri, GnomeVFSFileInfoOptions options, const GnomeVFSDirectoryFilter *filter);
 
+#ifdef GNOMEVFS2
   result = gnome_vfs_directory_open (&handle, (gchar *) SvPV(sv_uri,SvCUR(sv_uri)),
-                  GNOME_VFS_FILE_INFO_GET_MIME_TYPE+GNOME_VFS_FILE_INFO_FOLLOW_LINKS, NULL);
+          GNOME_VFS_FILE_INFO_GET_MIME_TYPE+GNOME_VFS_FILE_INFO_FOLLOW_LINKS);
+#else
+  result = gnome_vfs_directory_open (&handle, (gchar *) SvPV(sv_uri,SvCUR(sv_uri)),
+          GNOME_VFS_FILE_INFO_GET_MIME_TYPE+GNOME_VFS_FILE_INFO_FOLLOW_LINKS, NULL);
+#endif
   if (result != GNOME_VFS_OK) {
     return newSVsv(&PL_sv_undef);
   } else {
